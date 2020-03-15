@@ -33,8 +33,6 @@ public class ServerPublishThread implements Runnable{
                 } else if (msg.getType() == MsgType.type.ChatMsg) {
                     processChatMsg((ChatMsg) msg);
                 }
-                // if msg is shutdown
-                //  call msg.client.shutdown()
                 if(msg.getType() == MsgType.type.ShutDownMsg){
                     msg.getClient().shutdown();
                 }

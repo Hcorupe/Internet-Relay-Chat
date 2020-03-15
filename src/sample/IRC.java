@@ -1,12 +1,12 @@
 package sample;
-/*
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
- */
+
 
 import sample.Common.*;
 import sample.Server.ClientConnection;
@@ -19,8 +19,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class IRC {
-/*
+public class IRC extends Application{
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -31,10 +31,9 @@ public class IRC {
     }
 
 
- */
+
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
-    //ArrayList<PublishQueue> publishQueue = new ArrayList<>(); //serverPublishThread
 
     public static void main(String[] args) throws IOException, InterruptedException {
         //launch(args);

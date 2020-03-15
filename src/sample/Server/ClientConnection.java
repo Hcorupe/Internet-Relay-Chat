@@ -19,8 +19,6 @@ public class ClientConnection implements Runnable{
     private boolean shutdown = false;
 
 
-    //get connection set up and start publisherThread/serverpublisherThread first
-
     public ClientConnection(Socket socket) throws IOException {
         this.Socket = socket;
         out = new ObjectOutputStream(socket.getOutputStream());

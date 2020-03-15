@@ -27,9 +27,9 @@ public class Client implements Runnable {
 
         joinChannel("ch1");
         Thread.sleep(5000);
-        sendMessage("ch1","Text test");
+        sendMessage("ch1","Text test 1 ");
         Thread.sleep(5000);
-        sendMessage("ch1","Text test");
+        sendMessage("ch1","Text test 2 ");
     }
 
     public void joinChannel(String channel) throws IOException {
@@ -60,7 +60,7 @@ public class Client implements Runnable {
 
     public void shutdown() throws IOException {
         out.writeObject(new ShutDownMsg());
-        System.out.println("Shut down");
+        System.out.println("Client has disconnected Shut down");
     }
 
 
