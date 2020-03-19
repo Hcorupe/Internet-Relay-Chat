@@ -30,7 +30,7 @@ public class ClientMain extends Application{
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
-            System.out.println(args[0]);
+            //System.out.println(args[0]);
             launch(args);
 
             Thread.sleep(5000);
