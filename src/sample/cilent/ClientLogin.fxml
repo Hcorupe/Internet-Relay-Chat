@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="rootPane" prefHeight="400.0" prefWidth="253.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.cilent.ClientController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About Webchat" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="374.0" prefWidth="301.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Button fx:id="logIn" layoutX="101.0" layoutY="260.0" mnemonicParsing="false" onAction="#setLogIn" text="Login" />
+                <Label layoutX="80.0" layoutY="89.0" text="Enter Username" />
+                <TextField fx:id="usernameEntry" layoutX="46.0" layoutY="134.0" onKeyTyped="#setUsername" />
+                <MenuButton fx:id="channelMenu" layoutX="87.0" layoutY="191.0" mnemonicParsing="false" text="Channel">
+                    <items>
+                        <MenuItem fx:id="channel1" mnemonicParsing="false" onAction="#chooseChannel" text="Channel 1" />
+                        <MenuItem fx:id="channel2" mnemonicParsing="false" onAction="#chooseChannel" text="Channel 2" />
+                    </items>
+                </MenuButton>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
