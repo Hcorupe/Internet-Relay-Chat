@@ -21,8 +21,8 @@
                 <TextField fx:id="usernameEntry" layoutX="46.0" layoutY="134.0" onKeyTyped="#setUsername" />
                 <MenuButton fx:id="channelMenu" layoutX="87.0" layoutY="191.0" mnemonicParsing="false" text="Channel">
                     <items>
-                        <MenuItem fx:id="channel1" mnemonicParsing="false" onAction="#chooseChannel" text="Channel 1" />
-                        <MenuItem fx:id="channel2" mnemonicParsing="false" onAction="#chooseChannel" text="Channel 2" />
+                        <MenuItem mnemonicParsing="false" onAction="#chooseChannel" text="Channel 1" />
+                        <MenuItem mnemonicParsing="false" onAction="#chooseChannel" text="Channel 2" />
                     </items>
                 </MenuButton>
             </children>
