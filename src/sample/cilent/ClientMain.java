@@ -33,11 +33,5 @@ public class ClientMain extends Application{
             //System.out.println(args[0]);
             launch(args);
 
-            Thread.sleep(5000);
-            Socket Clientsocket = new Socket("localhost",800);
-            System.out.println("Before creating client ");
-            Client client = new Client(Clientsocket);
-            client.sendMessage("ch1","Text ...");
-            client.shutdown();
     }
 }

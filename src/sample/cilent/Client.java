@@ -25,11 +25,6 @@ public class Client implements Runnable {
         t2.start();
         System.out.println("after thread ");
 
-        joinChannel("ch1");
-        Thread.sleep(5000);
-        sendMessage("ch1","Text test 1 ");
-        Thread.sleep(5000);
-        sendMessage("ch1","Text test 2 ");
     }
 
     public void joinChannel(String channel) throws IOException {

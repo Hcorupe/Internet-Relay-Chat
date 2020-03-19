@@ -52,12 +52,14 @@ public class ServerPublishThread implements Runnable{
     }
     public void processChatMsg(ChatMsg msg) throws IOException {
         Channel channel = channels.get(msg.getChannel());
+        System.out.println(msg.getData());
         channel.PublishToChannel(msg);
     }
 
     static void addMsg(Message msg){
         System.out.println("Adding msg to queue of type " + msg.getType());
         blockingQueue.add(msg);
+
     }
 
 
