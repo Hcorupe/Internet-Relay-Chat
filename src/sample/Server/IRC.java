@@ -17,11 +17,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class IRC extends Application{
+public class IRC extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
@@ -33,7 +33,22 @@ public class IRC extends Application{
 
     public static void main(String[] args) throws IOException, InterruptedException {
         //launch(args);
-        System.out.println(args[0]);
+        //System.out.println(args[0]);
+
+
+        ServerSocket socket = new ServerSocket(800);
+        Thread workerThread = new Thread(new ServerPublishThread());
+        workerThread.start();
+        while (true) {
+            System.out.println("Before accept ");
+            ClientConnection client = new ClientConnection(socket.accept());
+            System.out.println("after accept ");
+            clientConnection.add(client);
+
+
+        /*
+
+
 
         if(args[0].equals("server")) {
             ServerSocket socket = new ServerSocket(800);
@@ -54,5 +69,8 @@ public class IRC extends Application{
                 client.sendMessage("ch1","Text ...");
                 client.shutdown();
             }
+
+         */
+        }
     }
 }
