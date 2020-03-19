@@ -21,25 +21,22 @@ import java.util.ArrayList;
 
 public class IRC extends Application{
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Server");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
 
-
-
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
-
     public static void main(String[] args) throws IOException, InterruptedException {
-        //launch(args);
+
         System.out.println(args[0]);
 
         if(args[0].equals("server")) {
+
             ServerSocket socket = new ServerSocket(800);
             Thread workerThread = new Thread(new ServerPublishThread());
             workerThread.start();
@@ -51,11 +48,15 @@ public class IRC extends Application{
             }
         }
             else if(args[0].equals("client")){
+                Controller controller = new Controller();
+                launch(args);
                 Thread.sleep(5000);
                 Socket Clientsocket = new Socket("localhost",800);
                 System.out.println("Before creating client ");
                 Client client = new Client(Clientsocket);
-                client.sendMessage("ch1","Text ...");
+                client.sendMessage(controller.getChannel(),"Text..");
+                //client.joinChannel(controller.getCheckBox_Channel1());
+                //client.sendMessage("ch1","Text ...");
                 client.shutdown();
             }
     }

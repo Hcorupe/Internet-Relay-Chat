@@ -19,7 +19,6 @@ public class Channel {
             c.sendMessage(msg);
         }
         clients.add(msg.getClient());
-
     }
 
     public void PublishToChannel(ChatMsg msg) throws IOException {

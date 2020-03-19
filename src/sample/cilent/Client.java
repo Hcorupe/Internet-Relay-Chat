@@ -1,6 +1,7 @@
 package sample.cilent;
 
 import sample.Common.*;
+import sample.Controller;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +13,7 @@ public class Client implements Runnable {
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
+    //Controller controller = new Controller();
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
@@ -26,6 +28,8 @@ public class Client implements Runnable {
         System.out.println("after thread ");
 
         joinChannel("ch1");
+        //joinChannel(controller.getChannel());
+        //sendMessage(controller.getChannel(),"Text..");
         Thread.sleep(5000);
         sendMessage("ch1","Text test 1 ");
         Thread.sleep(5000);

@@ -10,16 +10,7 @@ import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ServerPublishThread implements Runnable{
-//bool keeppublish
-    //setKeepPub(..)
 
-    //get next msg to process
-    //find out which client (Cn) need it
-    //write msg to outputstream
-
-    //while(keepPublishing)
-    //pull from queue
-    //find out who needs it ( client connection)
     static LinkedBlockingQueue<Message> blockingQueue = new LinkedBlockingQueue<Message>();
     HashMap<String, Channel> channels = new HashMap<String, Channel>();
 
