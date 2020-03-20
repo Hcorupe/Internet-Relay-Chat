@@ -17,7 +17,7 @@ public class ClientConnection implements Runnable{
     private ObjectOutputStream out;
     private Thread t1;
     private boolean shutdown = false;
-
+    String clientName;
 
     public ClientConnection(Socket socket) throws IOException {
         this.Socket = socket;
@@ -30,7 +30,6 @@ public class ClientConnection implements Runnable{
         System.out.println("Thread started");
     }
 
-    //getThread getter
     @Override
     public void run() {
         System.out.println("Run started");

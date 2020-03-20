@@ -33,5 +33,6 @@ public class ClientMain extends Application{
             //System.out.println(args[0]);
             launch(args);
 
+
     }
 }

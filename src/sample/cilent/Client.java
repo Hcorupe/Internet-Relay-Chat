@@ -1,17 +1,19 @@
 package sample.cilent;
-
 import sample.Common.*;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Client implements Runnable {
+public class Client implements Runnable,Observable1 {
 
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
+    String userName;
+    List<Observable1> observers = new ArrayList<>();
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
@@ -25,6 +27,15 @@ public class Client implements Runnable {
         t2.start();
         System.out.println("after thread ");
 
+    }
+
+    public void addClientName(String userName){
+        this.userName = userName;
+        System.out.println(userName);
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public void joinChannel(String channel) throws IOException {
@@ -51,6 +62,7 @@ public class Client implements Runnable {
         }
     }
     private void processChatMsg(ChatMsg msg){
+        //notifyObservers();
         System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
     }
 
@@ -59,5 +71,15 @@ public class Client implements Runnable {
         System.out.println("Client has disconnected Shut down");
     }
 
+    @Override
+    public void addObserver(Client client) {
+        this.addObserver(client);
+    }
 
+    @Override
+    public void notifyObservers() {
+        for(Observable1 client: this.observers){
+            //client.update();
+        }
+    }
 }

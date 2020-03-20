@@ -1,5 +1,9 @@
 package sample.cilent;
 
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +17,18 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.Common.Message;
+import sample.Server.ClientConnection;
 
 import java.net.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
-
 
 public class ClientController implements Initializable {
 
@@ -46,8 +55,8 @@ public class ClientController implements Initializable {
     TextField ipAddress;
     @FXML TextField sendBox;
 
-    Socket Clientsocket = new Socket("localhost",800);
-    Client client = new Client(Clientsocket);
+    Socket Clientsocket = null;
+    Client client;
 
     public ClientController() throws IOException, InterruptedException {
         System.out.println("NOT WORKING");
@@ -55,6 +64,14 @@ public class ClientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            Clientsocket = new Socket("localhost",800);
+            client = new Client(Clientsocket);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
         channel = " ";
         username = " ";
         currentMessage = " ";
@@ -80,15 +97,19 @@ public class ClientController implements Initializable {
         client.joinChannel(channel);
         System.out.println(channel);
     }
+
     public void setUsername(){
             username = usernameEntry.getText();
-            System.out.println(username);
+            //System.out.println(username);
+            client.addClientName(username);
             enteredUsername = true;
     }
 
     public void sendMessage() throws IOException {
         currentMessage = sendBox.getText();
         client.sendMessage(channel,currentMessage);
+
+
     }
     public void disconnect() throws IOException {
         client.shutdown();
@@ -101,6 +122,8 @@ public class ClientController implements Initializable {
         System.out.println(channel);
 
     }
+
+
     public void opensSecondUI() throws IOException {
         VBox pane = FXMLLoader.load(getClass().getResource("ClientUI.fxml"));
         rootPane.getChildren().setAll(pane);
