@@ -7,13 +7,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client implements Runnable,Observable1 {
+public class Client implements Runnable,Observer1 {
 
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
     String userName;
-    List<Observable1> observers = new ArrayList<>();
+    List<Observer1> observers = new ArrayList<>();
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
@@ -62,7 +62,7 @@ public class Client implements Runnable,Observable1 {
         }
     }
     private void processChatMsg(ChatMsg msg){
-        //notifyObservers();
+        notifyObservers(msg);
         System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
     }
 
@@ -73,13 +73,13 @@ public class Client implements Runnable,Observable1 {
 
     @Override
     public void addObserver(Client client) {
-        this.addObserver(client);
+        client.addObserver(client);
     }
 
     @Override
-    public void notifyObservers() {
-        for(Observable1 client: this.observers){
-            //client.update();
+    public void notifyObservers(ChatMsg msg) {
+        for(Observer1 client: this.observers){
+            client.notifyObservers(msg);
         }
     }
 }

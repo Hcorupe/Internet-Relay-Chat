@@ -17,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.Common.ChatMsg;
 import sample.Common.Message;
 import sample.Server.ClientConnection;
 
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
 
-public class ClientController implements Initializable {
+public class ClientController implements Initializable,Observable1 {
 
     String channel;
     String username;
@@ -82,7 +83,7 @@ public class ClientController implements Initializable {
     public void setLogIn() throws IOException, InterruptedException {
         if(enteredUsername && selectedChannel) {
             opensSecondUI();
-            //We need to resize the second screen
+            //need to resize the second screen
         }
         else{
             //Need to output corrections
@@ -107,8 +108,8 @@ public class ClientController implements Initializable {
 
     public void sendMessage() throws IOException {
         currentMessage = sendBox.getText();
+        this.notifyObserver(channel,currentMessage);
         client.sendMessage(channel,currentMessage);
-
 
     }
     public void disconnect() throws IOException {
@@ -128,6 +129,15 @@ public class ClientController implements Initializable {
         VBox pane = FXMLLoader.load(getClass().getResource("ClientUI.fxml"));
         rootPane.getChildren().setAll(pane);
     }
+
+    @Override
+    public void update(ChatMsg msg) throws IOException {
+        System.out.println("Update called");
+        client.sendMessage(channel,this.currentMessage);
+    }
+
+
+
 
     //GETS Client ADDRESS
    /* InetAddress localhost = InetAddress.getLocalHost();

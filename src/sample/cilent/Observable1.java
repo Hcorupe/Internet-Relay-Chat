@@ -1,8 +1,12 @@
 package sample.cilent;
 
-import java.util.Observer;
+import sample.Common.ChatMsg;
+import sample.Common.Message;
 
-public interface Observable1 {
-    void addObserver(Client client);
-    void notifyObservers();
+import java.io.IOException;
+
+interface Observable1 {
+
+    void update(Client client) throws IOException;
+
 }
