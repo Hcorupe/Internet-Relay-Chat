@@ -40,7 +40,7 @@ public class IRC extends Application {
             System.out.println("after accept ");
             clientConnection.add(client);
 
-            
+
             /*
             Move Server socket into the UIcontroller for server;
             update inside UIcontroller adds msg to a log display .
