@@ -5,8 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import sample.Common.ChatMsg;
+
 import java.net.*;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class ClientController {
 
@@ -55,6 +58,19 @@ public class ClientController {
         channel = clickedButton.getText();
         changeCh.setText(channel);
         client.joinChannel(channel);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        channel = " ";
+        currentMessage = " ";
+    }
+
+    @Override
+    public void update(ChatMsg msg) {
+        //Add msg text to text box
+        displayMsg(msg.getData());
+
     }
 
 }
