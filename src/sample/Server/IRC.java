@@ -22,7 +22,7 @@ public class IRC extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ServerUI.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
@@ -32,7 +32,7 @@ public class IRC extends Application {
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        //launch(args);
+        launch(args);
         //System.out.println(args[0]);
 
 
