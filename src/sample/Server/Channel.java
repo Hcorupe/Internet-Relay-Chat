@@ -3,6 +3,7 @@ package sample.Server;
 import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
 import sample.Common.Message;
+import sample.cilent.Client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class Channel {
     }
 
     public void addClient(JoinChannelMsg msg) throws IOException {
+        if(clients.contains(msg.getClient())){
+            return; // prevent client from adding multpule times
+        }
         for(ClientConnection c : clients){
             c.sendMessage(msg);
         }
@@ -26,6 +30,7 @@ public class Channel {
         for(ClientConnection c : clients){
             c.sendMessage(msg);
         }
+        System.out.println(clients.size());
     }
 
 

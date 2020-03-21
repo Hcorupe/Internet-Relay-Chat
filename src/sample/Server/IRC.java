@@ -18,15 +18,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class IRC extends Application {
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ServerUI.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-
     }
 
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
@@ -34,8 +31,6 @@ public class IRC extends Application {
     public static void main(String[] args) throws IOException, InterruptedException {
         //launch(args);
         //System.out.println(args[0]);
-
-
         ServerSocket socket = new ServerSocket(800);
         Thread workerThread = new Thread(new ServerPublishThread());
         workerThread.start();
@@ -44,6 +39,18 @@ public class IRC extends Application {
             ClientConnection client = new ClientConnection(socket.accept());
             System.out.println("after accept ");
             clientConnection.add(client);
+
+            
+            /*
+            Move Server socket into the UIcontroller for server;
+            update inside UIcontroller adds msg to a log display .
+
+           UIcontroller implement serverObserver
+
+           ServerPublishthread will impelment serverSubject
+
+             */
+
 
 
         /*

@@ -14,7 +14,7 @@
             <Button fx:id="btn_SendMsg" layoutX="341.0" layoutY="405.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
             <Button fx:id="btn_channel1" layoutX="101.0" layoutY="96.0" mnemonicParsing="false" onAction="#chooseChannel" text="Channel1" />
             <Button fx:id="btn_channel2" layoutX="244.0" layoutY="96.0" mnemonicParsing="false" onAction="#chooseChannel" text="Channel2" />
-            <TextField fx:id="txtf_DisplayMsg" layoutX="34.0" layoutY="167.0" onAction="#displayMsg" prefHeight="115.0" prefWidth="209.0" />
+            <TextField fx:id="txtf_DisplayMsg" layoutX="34.0" layoutY="167.0" prefHeight="115.0" prefWidth="209.0" />
          </children>
       </Pane>
    </children>

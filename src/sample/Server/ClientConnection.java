@@ -1,8 +1,6 @@
 package sample.Server;
 
 import sample.Common.Message;
-
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,7 +15,6 @@ public class ClientConnection implements Runnable{
     private ObjectOutputStream out;
     private Thread t1;
     private boolean shutdown = false;
-
 
     public ClientConnection(Socket socket) throws IOException {
         this.Socket = socket;

@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
-public class Client implements Runnable {
+public class Client implements Runnable,ClientSubject {
 
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
+    ArrayList<ClientObserver> myobservers = new ArrayList<>();
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
@@ -51,6 +53,7 @@ public class Client implements Runnable {
         }
     }
     private void processChatMsg(ChatMsg msg){
+        notifyObserver(msg);
         System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
     }
 
@@ -60,4 +63,15 @@ public class Client implements Runnable {
     }
 
 
+    @Override
+    public void addObserver(ClientObserver c) {
+        this.myobservers.add(c);
+    }
+
+    @Override
+    public void notifyObserver(ChatMsg msg) {
+        for(ClientObserver c : this.myobservers){
+            c.update(msg);
+        }
+    }
 }

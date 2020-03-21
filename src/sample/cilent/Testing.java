@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sample.Common.ChatMsg;
 import sample.Common.Message;
 
 import java.io.IOException;
@@ -17,9 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class Testing implements Initializable {
-
-
+public class Testing implements Initializable,ClientObserver {
     @FXML
         private TextField txtf_DisplayMsg;
 
@@ -40,6 +39,8 @@ public class Testing implements Initializable {
         String channel;
         String currentMessage;
         boolean selectedChannel;
+        Socket Clientsocket;
+
 
 
     private final Button add = new Button("Add");
@@ -47,21 +48,21 @@ public class Testing implements Initializable {
     private List<Label> messages = new ArrayList<>();
     Client client;
 
-
     public Testing() throws IOException, InterruptedException {
-        Socket Clientsocket = new Socket("localhost",800);
+        Thread.sleep(5000);
+        Clientsocket = new Socket("localhost",800);
         client = new Client(Clientsocket);
+        client.addObserver(this); //adds to list of things to get updated client will notify
     }
 
     public void sendMessage() throws IOException {
         currentMessage = txtf_SendMsg.getText();
         client.sendMessage(channel,currentMessage);
-        displayMsg();
     }
 
-    public void displayMsg(){
-        txtf_DisplayMsg.setText(currentMessage);
-        System.out.println("Current messss" + currentMessage);
+    public void displayMsg(String message){
+        txtf_DisplayMsg.appendText( "\n" + message);
+        System.out.println("Current messss" + message);
     }
 
     public void chooseChannel(ActionEvent Event) throws IOException {
@@ -75,17 +76,16 @@ public class Testing implements Initializable {
             txtf_DisplayMsg.setText(" "); // reset text box empty if channel changed or clicked
         }
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         channel = " ";
         currentMessage = " ";
     }
 
+    @Override
+    public void update(ChatMsg msg) {
+        //Add msg text to text box
+        displayMsg(msg.getData());
 
-
-
-
-
+    }
 }
