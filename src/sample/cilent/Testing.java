@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sample.Common.Message;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -69,7 +70,13 @@ public class Testing implements Initializable {
         selectedChannel = true;
         client.joinChannel(channel);
         System.out.println(channel);
+
+        if(clickedButton == (Button) Event.getTarget()){
+            txtf_DisplayMsg.setText(" "); // reset text box empty if channel changed or clicked
+        }
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         channel = " ";
