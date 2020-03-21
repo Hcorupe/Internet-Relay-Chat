@@ -29,7 +29,7 @@ public class Client implements Runnable {
 
     }
 
-    public void joinChannel(String channel,String userName) throws IOException {
+    public void joinChannel(String channel) throws IOException {
         System.out.println("Inside join channel ");
         out.writeObject(new JoinChannelMsg(channel));
     }
@@ -71,6 +71,5 @@ public class Client implements Runnable {
     public String getChannel(){
         return channel;
     }
-
 
 }

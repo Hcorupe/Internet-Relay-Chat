@@ -53,7 +53,7 @@ public class ServerPublishThread implements Runnable{
     }
     public void processChatMsg(ChatMsg msg) throws IOException {
         Channel channel = channels.get(msg.getChannel());
-        System.out.println("The message is: " + msg.getData() + " From "+ channels.get(msg.getChannel()));
+        System.out.println("The message is: " + msg.getData() + " From "+ channel);
         //channel.PublishToChannel(msg);
     }
 

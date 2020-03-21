@@ -7,29 +7,24 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.net.*;
 import java.io.IOException;
-
+import java.net.InetAddress;
 
 public class ClientLoginController {
 
     String channel;
     String username;
+    String ipAdd;
     boolean enteredUsername;
     boolean selectedChannel;
 
     @FXML
     TextField usernameEntry;
-    @FXML
-    MenuItem whichChannel;
     @FXML
     MenuButton channelMenu;
     @FXML
@@ -37,29 +32,30 @@ public class ClientLoginController {
     @FXML
     VBox rootPane;
 
-    public Client temp;
-
-    public ClientLoginController() throws IOException, InterruptedException {
+    public ClientLoginController(){
     }
 
-    public void setLogIn(ActionEvent event) throws IOException, InterruptedException {
+    public void setLogIn(ActionEvent event) throws IOException {
         if(enteredUsername && selectedChannel) {
+            InetAddress localhost = InetAddress.getLocalHost();
+            ipAdd = localhost.getHostAddress().trim();
+            System.out.println(ipAdd);
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("ClientUI.fxml"));
             Parent tableViewParent = loader.load();
             Scene tableViewScene = new Scene(tableViewParent);
 
             ClientController controller = loader.getController();
-            controller.initData(temp);
+            controller.initData(username,channel,ipAdd);
 
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
             window.setScene(tableViewScene);
             window.show();
-            //We need to resize the second screen
         }
     }
-    public void chooseChannel(ActionEvent Event) throws IOException {
+    public void chooseChannel(ActionEvent Event){
         MenuItem clickedButton = (MenuItem) Event.getTarget();
         channel = clickedButton.getText();
         channelMenu.setText(channel);
@@ -71,11 +67,5 @@ public class ClientLoginController {
         System.out.println(username);
         enteredUsername = true;
     }
-    
 
-    //GETS Client ADDRESS
-   /* InetAddress localhost = InetAddress.getLocalHost();
-        System.out.println("System IP Address : " +
-                (localhost.getHostAddress()).trim());
-    */
 }

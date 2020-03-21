@@ -3,8 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sample.cilent.ClientController">
+<VBox prefHeight="400.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.cilent.ClientController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -24,7 +23,7 @@
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
                 <Label layoutX="181.0" layoutY="34.0" text="IP adress" />
-                <TextField disable="true" layoutX="239.0" layoutY="30.0" prefHeight="23.0" prefWidth="107.0" />
+                <TextField fx:id="ipAddress" disable="true" layoutX="239.0" layoutY="30.0" prefHeight="23.0" prefWidth="107.0" />
                 <TextField disable="true" layoutX="27.0" layoutY="66.0" prefHeight="150.0" prefWidth="320.0" />
                 <TextField fx:id="sendBox" layoutX="27.0" layoutY="226.0" prefHeight="71.0" prefWidth="253.0" />
                 <Button fx:id="sendButton" layoutX="293.0" layoutY="226.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="71.0" prefWidth="55.0" text="Send" />
