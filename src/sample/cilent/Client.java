@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Client implements Runnable {
+public class Client implements Runnable  {
 
     private Socket socket;
     ObjectInputStream in;
