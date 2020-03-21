@@ -29,6 +29,7 @@ public class ServerPublishThread implements Runnable{
                 System.out.println("Trying to take from queue ");
                 Message msg = blockingQueue.take();
                 if (msg.getType() == MsgType.type.JoinMsg) {
+                    System.out.println(msg.getType());
                     processMsgJoinMsg((JoinChannelMsg) msg);
                 } else if (msg.getType() == MsgType.type.ChatMsg) {
                     processChatMsg((ChatMsg) msg);
@@ -52,8 +53,8 @@ public class ServerPublishThread implements Runnable{
     }
     public void processChatMsg(ChatMsg msg) throws IOException {
         Channel channel = channels.get(msg.getChannel());
-        System.out.println(msg.getData());
-        channel.PublishToChannel(msg);
+        System.out.println("The message is: " + msg.getData() + " From "+ channels.get(msg.getChannel()));
+        //channel.PublishToChannel(msg);
     }
 
     static void addMsg(Message msg){

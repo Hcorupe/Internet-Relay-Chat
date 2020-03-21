@@ -11,10 +11,12 @@ public class ChatMsg extends Message {
     }
 
     public String getChannel() {
+        System.out.println(channel);
         return channel;
     }
 
     public String getData() {
+        System.out.println(data);
         return data;
     }
 }

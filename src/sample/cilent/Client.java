@@ -12,6 +12,8 @@ public class Client implements Runnable {
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
+    String userName;
+    String channel;
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
@@ -27,9 +29,9 @@ public class Client implements Runnable {
 
     }
 
-    public void joinChannel(String channel) throws IOException {
+    public void joinChannel(String channel,String userName) throws IOException {
         System.out.println("Inside join channel ");
-        out.writeObject(new JoinChannelMsg(channel));
+        out.writeObject(new JoinChannelMsg(channel,userName));
     }
 
     public void sendMessage(String channel, String data) throws IOException {
@@ -57,6 +59,17 @@ public class Client implements Runnable {
     public void shutdown() throws IOException {
         out.writeObject(new ShutDownMsg());
         System.out.println("Client has disconnected Shut down");
+    }
+    public void setUserInfo(String user, String ch)  {
+        System.out.println(user);
+        userName = user;
+        channel = ch;
+    }
+    public String getUsername(){
+        return userName;
+    }
+    public String getChannel(){
+        return channel;
     }
 
 

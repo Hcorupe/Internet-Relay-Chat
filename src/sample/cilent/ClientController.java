@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.Common.JoinChannelMsg;
 
 import java.net.*;
 import java.awt.*;
@@ -21,13 +23,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ClientController implements Initializable {
+public class ClientController {
 
     String channel;
     String username;
     String currentMessage;
-    boolean enteredUsername;
-    boolean selectedChannel;
 
     @FXML
     TextField usernameEntry;
@@ -53,42 +53,14 @@ public class ClientController implements Initializable {
         System.out.println("NOT WORKING");
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        channel = " ";
-        username = " ";
-        currentMessage = " ";
-        enteredUsername = false;
-        selectedChannel = false;
-    }
-
-    public void setLogIn() throws IOException, InterruptedException {
-        if(enteredUsername && selectedChannel) {
-            opensSecondUI();
-            //We need to resize the second screen
-        }
-        else{
-            //Need to output corrections
-        }
-
-    }
-    public void chooseChannel(ActionEvent Event) throws IOException {
-        MenuItem clickedButton = (MenuItem) Event.getTarget();
-        channel = clickedButton.getText();
-        channelMenu.setText(channel);
-        selectedChannel = true;
-        client.joinChannel(channel);
-        System.out.println(channel);
-    }
-    public void setUsername(){
-            username = usernameEntry.getText();
-            System.out.println(username);
-            enteredUsername = true;
-    }
-
     public void sendMessage() throws IOException {
+        username = client.getUsername();
+        channel = client.getChannel();
+        System.out.println("USERNAME:" + username);
         currentMessage = sendBox.getText();
+        System.out.println("CHANNEL" + channel);
         client.sendMessage(channel,currentMessage);
+        sendBox.setText("");
     }
     public void disconnect() throws IOException {
         client.shutdown();
@@ -97,13 +69,7 @@ public class ClientController implements Initializable {
         MenuItem clickedButton = (MenuItem) Event.getTarget();
         channel = clickedButton.getText();
         changeCh.setText(channel);
-        client.joinChannel(channel);
-        System.out.println(channel);
-
-    }
-    public void opensSecondUI() throws IOException {
-        VBox pane = FXMLLoader.load(getClass().getResource("ClientUI.fxml"));
-        rootPane.getChildren().setAll(pane);
+        client.joinChannel(channel,username);
     }
 
     //GETS Client ADDRESS
