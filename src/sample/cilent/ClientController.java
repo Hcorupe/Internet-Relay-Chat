@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
-
+//observerable checking UI input to update client send message
 public class ClientController implements Initializable,Observable1 {
 
     String channel;
@@ -108,8 +108,9 @@ public class ClientController implements Initializable,Observable1 {
 
     public void sendMessage() throws IOException {
         currentMessage = sendBox.getText();
-        this.notifyObserver(channel,currentMessage);
-        client.sendMessage(channel,currentMessage);
+        //this.notifyObserver(channel,currentMessage);
+        this.update(client);
+        //client.sendMessage(channel,currentMessage);
 
     }
     public void disconnect() throws IOException {
@@ -131,12 +132,9 @@ public class ClientController implements Initializable,Observable1 {
     }
 
     @Override
-    public void update(ChatMsg msg) throws IOException {
-        System.out.println("Update called");
-        client.sendMessage(channel,this.currentMessage);
+    public void update(Client client) throws IOException {
+        client.sendMessage(channel,currentMessage);
     }
-
-
 
 
     //GETS Client ADDRESS

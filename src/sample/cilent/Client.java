@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-
+//observer - clients are observing UIcontroller for text coming in to put into the message
 public class Client implements Runnable,Observer1 {
 
     private Socket socket;
@@ -73,13 +73,16 @@ public class Client implements Runnable,Observer1 {
 
     @Override
     public void addObserver(Client client) {
-        client.addObserver(client);
+        System.out.println("Added observer " + client);
+        this.observers.add(client);
     }
 
     @Override
     public void notifyObservers(ChatMsg msg) {
         for(Observer1 client: this.observers){
+            System.out.println("Notify Observer " + client);
             client.notifyObservers(msg);
+            System.out.println("Messge = " + msg);
         }
     }
 }
