@@ -21,9 +21,10 @@ public class ClientMain extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ClientLogin.fxml"));
-        primaryStage.setTitle("Client Login");
-        primaryStage.setScene(new Scene(root, 250, 400));
+        //Parent root = FXMLLoader.load(getClass().getResource("ClientLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Testing.fxml"));
+        primaryStage.setTitle("Testing");
+        primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
     }
 
