@@ -31,7 +31,7 @@ public class Client implements Runnable {
 
     public void joinChannel(String channel,String userName) throws IOException {
         System.out.println("Inside join channel ");
-        out.writeObject(new JoinChannelMsg(channel,userName));
+        out.writeObject(new JoinChannelMsg(channel));
     }
 
     public void sendMessage(String channel, String data) throws IOException {

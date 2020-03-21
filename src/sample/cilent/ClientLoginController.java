@@ -3,13 +3,18 @@ package sample.cilent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.net.*;
 import java.io.IOException;
 
@@ -32,12 +37,25 @@ public class ClientLoginController {
     @FXML
     VBox rootPane;
 
+    public Client temp;
+
     public ClientLoginController() throws IOException, InterruptedException {
     }
 
-    public void setLogIn() throws IOException, InterruptedException {
+    public void setLogIn(ActionEvent event) throws IOException, InterruptedException {
         if(enteredUsername && selectedChannel) {
-            opensSecondUI();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("ClientUI.fxml"));
+            Parent tableViewParent = loader.load();
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            ClientController controller = loader.getController();
+            controller.initData(temp);
+
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
             //We need to resize the second screen
         }
     }
@@ -53,13 +71,7 @@ public class ClientLoginController {
         System.out.println(username);
         enteredUsername = true;
     }
-
-    public void opensSecondUI() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("ClientUI.fxml"));
-        VBox pane = loader.load();
-        rootPane.getChildren().setAll(pane);
-    }
+    
 
     //GETS Client ADDRESS
    /* InetAddress localhost = InetAddress.getLocalHost();

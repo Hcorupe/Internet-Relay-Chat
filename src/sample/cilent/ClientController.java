@@ -46,11 +46,16 @@ public class ClientController {
     TextField ipAddress;
     @FXML TextField sendBox;
 
+    private Client selectedPerson;
     Socket Clientsocket = new Socket("localhost",800);
     Client client = new Client(Clientsocket);
 
     public ClientController() throws IOException, InterruptedException {
         System.out.println("NOT WORKING");
+    }
+
+    public void initData(Client client){
+        selectedPerson = client;
     }
 
     public void sendMessage() throws IOException {
