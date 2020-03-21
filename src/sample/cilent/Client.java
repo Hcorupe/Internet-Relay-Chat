@@ -62,7 +62,6 @@ public class Client implements Runnable,ClientSubject {
         System.out.println("Client has disconnected Shut down");
     }
 
-
     @Override
     public void addObserver(ClientObserver c) {
         this.myobservers.add(c);

@@ -41,8 +41,6 @@ public class Testing implements Initializable,ClientObserver {
         boolean selectedChannel;
         Socket Clientsocket;
 
-
-
     private final Button add = new Button("Add");
     private final VBox chatBox = new VBox(5);
     private List<Label> messages = new ArrayList<>();

@@ -4,12 +4,14 @@ import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
 import sample.Common.MsgType;
 import sample.Common.Message;
+import sample.cilent.ClientObserver;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class ServerPublishThread implements Runnable{
+public class ServerPublishThread implements Runnable,ServerSubject{
 //bool keeppublish
     //setKeepPub(..)
 
@@ -22,6 +24,7 @@ public class ServerPublishThread implements Runnable{
     //find out who needs it ( client connection)
     static LinkedBlockingQueue<Message> blockingQueue = new LinkedBlockingQueue<Message>();
     HashMap<String, Channel> channels = new HashMap<String, Channel>();
+    ArrayList<ServerObserver> myobservers = new ArrayList<>();
 
     public void run() { // pull from q and check msg type .. then handle
         while(true){
@@ -62,5 +65,15 @@ public class ServerPublishThread implements Runnable{
 
     }
 
+    @Override
+    public void addObserver(ServerObserver s) {
+        this.myobservers.add(s);
+    }
 
+    @Override
+    public void notifyObserver(ChatMsg msg) {
+        for(ServerObserver s: this.myobservers){
+            s.update(msg);
+        }
+    }
 }

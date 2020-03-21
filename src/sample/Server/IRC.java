@@ -26,11 +26,12 @@ public class IRC extends Application {
         primaryStage.show();
     }
 
-    static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
+    //static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        //launch(args);
+        launch(args);
         //System.out.println(args[0]);
+        /*
         ServerSocket socket = new ServerSocket(800);
         Thread workerThread = new Thread(new ServerPublishThread());
         workerThread.start();
@@ -39,7 +40,7 @@ public class IRC extends Application {
             ClientConnection client = new ClientConnection(socket.accept());
             System.out.println("after accept ");
             clientConnection.add(client);
-
+*/
 
             /*
             Move Server socket into the UIcontroller for server;
@@ -80,4 +81,4 @@ public class IRC extends Application {
          */
         }
     }
-}
+

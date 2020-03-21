@@ -1,5 +1,7 @@
 package sample.Server;
 
+import sample.Common.ChatMsg;
+
 public interface ServerObserver {
-    void update();
+    void update(ChatMsg msg);
 }
