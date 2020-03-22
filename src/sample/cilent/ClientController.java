@@ -32,7 +32,7 @@ public class ClientController implements ClientObserver{
     Client client = new Client(clientSocket);
 
     public ClientController() throws IOException, InterruptedException {
-        System.out.println("NOT WORKING");
+
     }
 
     public void initData(String name, String ch,String ip){
