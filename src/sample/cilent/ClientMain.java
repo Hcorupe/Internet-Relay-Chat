@@ -32,7 +32,7 @@ public class ClientMain extends Application{
 
     public static void main(String[] args) throws IOException, InterruptedException {
             //System.out.println(args[0]);
-            launch(args);
+            //launch(args);
 
     }
 }

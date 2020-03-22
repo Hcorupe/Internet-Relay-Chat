@@ -21,17 +21,19 @@ public class IRC extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("ServerUI.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Server Logs");
+        primaryStage.setScene(new Scene(root, 500, 575));
         primaryStage.show();
     }
 
-    //static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
+    static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
         launch(args);
+        ServerController controller = new ServerController();
+
         //System.out.println(args[0]);
-        /*
+
         ServerSocket socket = new ServerSocket(800);
         Thread workerThread = new Thread(new ServerPublishThread());
         workerThread.start();
@@ -40,7 +42,7 @@ public class IRC extends Application {
             ClientConnection client = new ClientConnection(socket.accept());
             System.out.println("after accept ");
             clientConnection.add(client);
-*/
+
 
             /*
             Move Server socket into the UIcontroller for server;
@@ -81,4 +83,5 @@ public class IRC extends Application {
          */
         }
     }
+}
 

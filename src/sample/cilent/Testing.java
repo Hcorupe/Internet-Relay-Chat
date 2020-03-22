@@ -59,7 +59,7 @@ public class Testing implements Initializable,ClientObserver {
     }
 
     public void displayMsg(String message){
-        txtf_DisplayMsg.appendText( "\n" + message);
+        txtf_DisplayMsg.appendText( "\n\n" + message);
         System.out.println("Current messss" + message);
     }
 
