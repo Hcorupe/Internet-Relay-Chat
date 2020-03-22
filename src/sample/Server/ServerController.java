@@ -1,6 +1,7 @@
 package sample.Server;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,18 +16,22 @@ import java.util.ResourceBundle;
 
 public class ServerController implements ServerObserver, Initializable {
 
-    public TextField txtf_log;
+    @FXML
+    TextField txtf_log;
     ServerSocket socket;
     Thread workerThread;
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
+
+
     public ServerController() throws IOException {
+        test();
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        test(); // IF you delete this function, Both UIs will pop up...
+       //test();// IF you delete this function, Both UIs will pop up...
     }
 
     public void displayLog(String message){
@@ -35,7 +40,7 @@ public class ServerController implements ServerObserver, Initializable {
     }
     public void test(){
         try {
-            socket = new ServerSocket(800);
+            socket = new ServerSocket(8000);
             workerThread = new Thread( new ServerPublishThread());
             workerThread.start();
             while(true){

@@ -28,7 +28,7 @@ public class ClientController implements ClientObserver{
     @FXML
     TextField outputUI;
 
-    Socket clientSocket = new Socket("localhost",800);
+    Socket clientSocket = new Socket("localhost",8000);
     Client client = new Client(clientSocket);
 
     public ClientController() throws IOException, InterruptedException {
