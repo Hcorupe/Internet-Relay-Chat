@@ -7,6 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import sample.Common.ChatMsg;
 
+import java.awt.desktop.SystemSleepEvent;
 import java.net.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -35,8 +36,9 @@ public class ClientController implements ClientObserver{
     }
 
     public void initData(String name, String ch,String ip){
-        client.setUserInfo(name ,ch);
+        System.out.println("ADDING INIT");
         client.addObserver(this);
+        client.setUserInfo(name ,ch);
         username = name;
         channel = ch;
         ipAdd = ip;
@@ -47,8 +49,8 @@ public class ClientController implements ClientObserver{
         username = client.getUsername();
         channel = client.getChannel();
         System.out.println("USERNAME: " + username);
-        currentMessage = sendBox.getText();
         System.out.println("CHANNEL: " + channel);
+        currentMessage = sendBox.getText();
         client.sendMessage(channel,currentMessage);
         sendBox.setText("");
     }
@@ -70,6 +72,7 @@ public class ClientController implements ClientObserver{
     @Override
     public void update(ChatMsg msg) {
         //Add msg text to text box
+        System.out.println("DISPLAYYEDDDD");
         displayMsg(msg.getData());
     }
 

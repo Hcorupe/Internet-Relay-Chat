@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class Client implements Runnable, ClientSubject  {
 
-    private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
     String userName;
@@ -19,7 +18,6 @@ public class Client implements Runnable, ClientSubject  {
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
-        this.socket = socket;
         System.out.println("Before In ");
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
@@ -36,7 +34,7 @@ public class Client implements Runnable, ClientSubject  {
     }
 
     public void sendMessage(String channel, String data) throws IOException {
-        System.out.println("Inside sendmessage ");
+        System.out.println("Inside sendMessage ");
         out.writeObject(new ChatMsg(channel,data));
     }
 
@@ -55,6 +53,7 @@ public class Client implements Runnable, ClientSubject  {
     }
 
     private void processChatMsg(ChatMsg msg){
+        System.out.println("NOTIFYING THE NOTIFIER");
         notifyObserver(msg);
         System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
     }
@@ -80,11 +79,13 @@ public class Client implements Runnable, ClientSubject  {
 
     @Override
     public void addObserver(ClientObserver c) {
+        System.out.println("ADDING the CLIENT to the Obs");
         this.myobservers.add(c);
     }
 
     @Override
     public void notifyObserver(ChatMsg msg) {
+        System.out.println("NOTIFY");
         for(ClientObserver c : this.myobservers){
             c.update(msg);
         }
