@@ -30,10 +30,8 @@ public class IRC extends Application {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         launch(args);
-        ServerController controller = new ServerController();
 
-        //System.out.println(args[0]);
-
+        /*
         ServerSocket socket = new ServerSocket(800);
         Thread workerThread = new Thread(new ServerPublishThread());
         workerThread.start();
@@ -44,6 +42,7 @@ public class IRC extends Application {
             clientConnection.add(client);
 
 
+         */
             /*
             Move Server socket into the UIcontroller for server;
             update inside UIcontroller adds msg to a log display .
@@ -83,5 +82,5 @@ public class IRC extends Application {
          */
         }
     }
-}
+
 

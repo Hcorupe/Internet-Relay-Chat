@@ -20,23 +20,22 @@ public class ServerController implements Initializable, ServerObserver {
     Thread workerThread;
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
-        public ServerController(){
-            try {
-                socket = new ServerSocket(800);
-                workerThread = new Thread( new ServerPublishThread());
-                workerThread.start();
-                while(true){
-                    System.out.println("Before accept ");
-                    ClientConnection client = new ClientConnection(socket.accept());
-                    System.out.println("after accept ");
-                    clientConnection.add(client);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            socket = new ServerSocket(800);
+            workerThread = new Thread( new ServerPublishThread());
+            workerThread.start();
+            while(true){
+                System.out.println("Before accept ");
+                ClientConnection client = new ClientConnection(socket.accept());
+                System.out.println("after accept ");
+                clientConnection.add(client);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void displayLog(String message){

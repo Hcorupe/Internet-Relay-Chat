@@ -22,7 +22,7 @@ public class ClientMain extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("ClientLogin.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("Testing.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("testing.fxml"));
         primaryStage.setTitle("Testing");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
@@ -32,7 +32,7 @@ public class ClientMain extends Application{
 
     public static void main(String[] args) throws IOException, InterruptedException {
             //System.out.println(args[0]);
-            //launch(args);
+            launch(args);
 
     }
 }
