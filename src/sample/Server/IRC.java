@@ -32,7 +32,7 @@ public class IRC extends Application {
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        launch(args);
+       // launch(args);
         //System.out.println(args[0]);
 
 

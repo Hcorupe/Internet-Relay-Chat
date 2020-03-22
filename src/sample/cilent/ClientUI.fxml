@@ -24,7 +24,7 @@
             <children>
                 <Label layoutX="181.0" layoutY="34.0" text="IP adress" />
                 <TextField fx:id="ipAddress" disable="true" layoutX="239.0" layoutY="30.0" prefHeight="23.0" prefWidth="107.0" />
-                <TextField disable="true" layoutX="27.0" layoutY="66.0" prefHeight="150.0" prefWidth="320.0" />
+                <TextField fx:id="outputUI" disable="true" layoutX="27.0" layoutY="66.0" prefHeight="150.0" prefWidth="320.0" />
                 <TextField fx:id="sendBox" layoutX="27.0" layoutY="226.0" prefHeight="71.0" prefWidth="253.0" />
                 <Button fx:id="sendButton" layoutX="293.0" layoutY="226.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="71.0" prefWidth="55.0" text="Send" />
                 <Button layoutX="262.0" layoutY="311.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="49.0" prefWidth="86.0" text="Disconnect" />

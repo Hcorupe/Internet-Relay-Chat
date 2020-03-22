@@ -11,7 +11,7 @@ import java.net.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class ClientController {
+public class ClientController implements ClientObserver{
 
     String channel;
     String username;
@@ -24,9 +24,11 @@ public class ClientController {
     TextField ipAddress;
     @FXML
     TextField sendBox;
+    @FXML
+    TextField outputUI;
 
-    Socket Clientsocket = new Socket("localhost",800);
-    Client client = new Client(Clientsocket);
+    Socket clientSocket = new Socket("localhost",800);
+    Client client = new Client(clientSocket);
 
     public ClientController() throws IOException, InterruptedException {
         System.out.println("NOT WORKING");
@@ -34,11 +36,11 @@ public class ClientController {
 
     public void initData(String name, String ch,String ip){
         client.setUserInfo(name ,ch);
+        client.addObserver(this);
         username = name;
         channel = ch;
         ipAdd = ip;
         ipAddress.setText(ipAdd);
-
     }
 
     public void sendMessage() throws IOException {
@@ -60,17 +62,15 @@ public class ClientController {
         client.joinChannel(channel);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        channel = " ";
-        currentMessage = " ";
+    public void displayMsg(String message){
+        outputUI.appendText( "\n" + message);
+        System.out.println("Current messss" + message);
     }
 
     @Override
     public void update(ChatMsg msg) {
         //Add msg text to text box
         displayMsg(msg.getData());
-
     }
 
 }

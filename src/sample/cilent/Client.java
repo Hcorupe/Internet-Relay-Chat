@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Client implements Runnable  {
+public class Client implements Runnable, ClientSubject  {
 
     private Socket socket;
     ObjectInputStream in;
@@ -28,7 +28,6 @@ public class Client implements Runnable  {
         Thread t2 = new Thread(this);
         t2.start();
         System.out.println("after thread ");
-
     }
 
     public void joinChannel(String channel) throws IOException {
@@ -54,8 +53,9 @@ public class Client implements Runnable  {
             e.printStackTrace();
         }
     }
+
     private void processChatMsg(ChatMsg msg){
-        client.addObserver(this);
+        notifyObserver(msg);
         System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
     }
 
@@ -63,14 +63,17 @@ public class Client implements Runnable  {
         out.writeObject(new ShutDownMsg());
         System.out.println("Client has disconnected Shut down");
     }
+
     public void setUserInfo(String user, String ch)  {
         System.out.println(user);
         userName = user;
         channel = ch;
     }
+
     public String getUsername(){
         return userName;
     }
+
     public String getChannel(){
         return channel;
     }
@@ -86,7 +89,5 @@ public class Client implements Runnable  {
             c.update(msg);
         }
     }
-
-
 
 }
