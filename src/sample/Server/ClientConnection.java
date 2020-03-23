@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class ClientConnection implements Runnable{
 
     private Socket Socket;
-    private ArrayList<String> subScribedChannels;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private Thread t1;
@@ -21,7 +20,7 @@ public class ClientConnection implements Runnable{
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
-        subScribedChannels = new ArrayList<String>();
+        ArrayList<String> subScribedChannels = new ArrayList<String>();
         t1 = new Thread( this);
         t1.start();
         System.out.println("Thread started");

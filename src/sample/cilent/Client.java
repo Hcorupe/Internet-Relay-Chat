@@ -14,7 +14,7 @@ public class Client implements Runnable,ClientSubject {
     ObjectOutputStream out;
     ArrayList<ClientObserver> myobservers = new ArrayList<>();
 
-    public Client(Socket socket) throws IOException, InterruptedException {
+    public Client(Socket socket) throws IOException {
         System.out.println("Before socket ");
         this.socket = socket;
         System.out.println("Before In ");
@@ -25,20 +25,16 @@ public class Client implements Runnable,ClientSubject {
         Thread t2 = new Thread(this);
         t2.start();
         System.out.println("after thread ");
-
-    }
-    public Client(){
-
     }
 
     public void joinChannel(String channel) throws IOException {
-        System.out.println("Inside join channel ");
+        System.out.println("Inside joinChannel ");
         out.writeObject(new JoinChannelMsg(channel));
     }
 
-    public void sendMessage(String channel, String data) throws IOException {
-        System.out.println("Inside sendmessage ");
-        out.writeObject(new ChatMsg(channel,data));
+    public void sendMessage(String channel, String data,String userName) throws IOException {
+        System.out.println("Inside sendMessage ");
+        out.writeObject(new ChatMsg(channel,data,userName));
     }
 
     public void run(){
@@ -55,9 +51,9 @@ public class Client implements Runnable,ClientSubject {
         }
     }
     private void processChatMsg(ChatMsg msg){
-        System.out.println("PROCCESSING");
+        System.out.println("PROCESSING");
         notifyObserver(msg);
-        System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
+        System.out.println( "ProcessChatMsg " + msg.getChannel() + msg.getData());
     }
 
     public void shutdown() throws IOException {

@@ -13,7 +13,7 @@ public class Channel {
     public void addClient(JoinChannelMsg msg) throws IOException {
         System.out.println("Adding Client");
         if(clients.contains(msg.getClient())){
-            return; // prevent client from adding multpule times
+            return; // prevent client from adding multiple times
         }
         for(ClientConnection c : clients){
             c.sendMessage(msg);
@@ -21,7 +21,7 @@ public class Channel {
         clients.add(msg.getClient());
     }
 
-    public void PublishToChannel(ChatMsg msg) throws IOException {
+    public void PublishToChannel(ChatMsg msg){
         System.out.println("PUBLISHING TO CHANNELS");
         for(ClientConnection c : clients){
             c.sendMessage(msg);

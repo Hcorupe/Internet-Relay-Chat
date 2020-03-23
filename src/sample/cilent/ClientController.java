@@ -2,26 +2,16 @@ package sample.cilent;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import sample.Common.ChatMsg;
-
-import java.awt.*;
-import java.awt.desktop.SystemSleepEvent;
 import java.net.*;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public class ClientController implements ClientObserver {
-
-    String channel;
-    String username;
-    String ipAdd;
-    String currentMessage;
 
     @FXML
     Menu changeCh;
@@ -34,16 +24,21 @@ public class ClientController implements ClientObserver {
     @FXML
     Button sendButton;
 
+    String channel;
+    String username;
+    String ipAdd;
+    String currentMessage;
+
+
     Socket clientSocket = new Socket("localhost",8000);
     Client client = new Client(clientSocket);
 
-    public ClientController() throws IOException, InterruptedException {
+    public ClientController() throws IOException{
         System.out.println("Adding OBServe");
         client.addObserver(this);
     }
 
     public void initData(String name, String ch,String ip) throws IOException {
-        System.out.println("ADDING INIT");
         username = name;
         channel = ch;
         ipAdd = ip;
@@ -52,10 +47,8 @@ public class ClientController implements ClientObserver {
     }
 
     public void send() throws IOException {
-        System.out.println("USERNAME: " + username);
-        System.out.println("CHANNEL: " + channel);
         currentMessage = sendBox.getText();
-        client.sendMessage(channel,currentMessage);
+        client.sendMessage(channel,currentMessage,username);
         sendBox.setText("");
     }
     public void disconnect() throws IOException {
@@ -71,14 +64,14 @@ public class ClientController implements ClientObserver {
         outputUI.setText(null);
     }
 
-    public void displayMsg(String message){
-        outputUI.appendText(username + ": " + message + "\n");
+    public void displayMsg(String message,String whoSentIt){
+        outputUI.appendText(whoSentIt + ": " + message + "\n");
     }
 
     @Override
     public void update(ChatMsg msg) {
         //Add msg text to text box
-        displayMsg(msg.getData());
+        displayMsg(msg.getData(),msg.getUser());
     }
 
 }
