@@ -68,6 +68,7 @@ public class ClientController implements ClientObserver {
         channel = clickedButton.getText();
         changeCh.setText(channel);
         client.joinChannel(channel);
+        outputUI.setText(null);
     }
 
     public void displayMsg(String message){
