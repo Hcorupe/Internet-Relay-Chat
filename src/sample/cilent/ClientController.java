@@ -3,6 +3,7 @@ package sample.cilent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -30,6 +31,8 @@ public class ClientController implements ClientObserver {
     TextField sendBox;
     @FXML
     TextArea outputUI;
+    @FXML
+    Button sendButton;
 
     Socket clientSocket = new Socket("localhost",8000);
     Client client = new Client(clientSocket);
@@ -56,6 +59,8 @@ public class ClientController implements ClientObserver {
         sendBox.setText("");
     }
     public void disconnect() throws IOException {
+        sendButton.setDisable(true);
+        sendBox.setDisable(true);
         client.shutdown();
     }
     public void changeChannel(ActionEvent Event) throws IOException {   //Changes the channel on the second UI
