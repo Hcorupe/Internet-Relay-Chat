@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class Testing implements Initializable,ClientObserver {
     @FXML
-        private TextField txtf_DisplayMsg;
+        private TextArea txtf_DisplayMsg;
 
         @FXML
         private TextField txtf_SendMsg;
@@ -45,30 +45,6 @@ public class Testing implements Initializable,ClientObserver {
     private List<Label> messagelist = new ArrayList<>();
     Client client;
 
-    public void sendMessage() throws IOException {
-        currentMessage = txtf_SendMsg.getText();
-        client.sendMessage(channel,currentMessage);
-    }
-
-    public void displayMsg(String message){
-
-        //btn_SendMsg.setOnAction(e);
-
-        txtf_DisplayMsg.appendText( "\n\n" + message);
-        System.out.println("Current messss" + message);
-    }
-
-    public void chooseChannel(ActionEvent Event) throws IOException {
-        Button clickedButton = (Button) Event.getTarget();
-        channel = clickedButton.getText();
-        selectedChannel = true;
-        client.joinChannel(channel);
-        System.out.println(channel);
-
-        if(clickedButton == (Button) Event.getTarget()){
-            txtf_DisplayMsg.setText(" "); // reset text box empty if channel changed or clicked
-        }
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -83,6 +59,30 @@ public class Testing implements Initializable,ClientObserver {
         currentMessage = " ";
     }
 
+    public void sendMessage() throws IOException {
+        currentMessage = txtf_SendMsg.getText();
+        client.sendMessage(channel,currentMessage);
+    }
+
+    public void displayMsg(String message){
+
+        //btn_SendMsg.setOnAction(e);
+        txtf_DisplayMsg.appendText( "\n" + message);
+        System.out.println("Current messss" + message);
+    }
+
+    public void chooseChannel(ActionEvent Event) throws IOException {
+        Button clickedButton = (Button) Event.getTarget();
+        channel = clickedButton.getText();
+        selectedChannel = true;
+        client.joinChannel(channel);
+        System.out.println(channel);
+
+        if(clickedButton == (Button) Event.getTarget()){
+            txtf_DisplayMsg.setText(" "); // reset text box empty if channel changed or clicked
+        }
+    }
+    
     @Override
     public void update(ChatMsg msg) {
         //Add msg text to text box

@@ -48,12 +48,12 @@ public class ServerPublishThread implements Runnable,ServerSubject{
         Channel channel = channels.get(msg.getChannel());
         System.out.println(msg.getData());
         channel.PublishToChannel(msg);
+
     }
 
     static void addMsg(Message msg){
         System.out.println("Adding msg to queue of type " + msg.getType());
         blockingQueue.add(msg);
-
     }
 
     @Override
@@ -64,6 +64,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
     @Override
     public void notifyObserver(ChatMsg msg) {
         for(ServerObserver s: this.myobservers){
+            System.out.println("nofity observer called " );
             s.update(msg);
         }
     }

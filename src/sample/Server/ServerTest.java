@@ -1,8 +1,11 @@
 package sample.Server;
 
+import com.sun.javafx.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import sample.Common.ChatMsg;
+
 import java.beans.Transient;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ServerTest implements Initializable {
+public class ServerTest implements Initializable ,ServerObserver{
     public TextField txtf_Log;
     ServerSocket socket;
     Thread workerThread;
@@ -28,7 +31,8 @@ public class ServerTest implements Initializable {
                 workerThread.start();
                 socket = new ServerSocket(800);
                 System.out.println("After socket");
-                Platform.runLater(() -> txtf_Log.appendText("New Server start at " + new Date() + '\n'));
+                Platform.runLater(() -> txtf_Log.appendText("New Server start at "
+                        + new Date() + '\n'  ));
                 while (true) {
                     System.out.println("Before accept ");
                     ClientConnection client = new ClientConnection(socket.accept());
@@ -41,16 +45,22 @@ public class ServerTest implements Initializable {
             }
         }).start();
 
-
-
-
-
+    }
+        public void displayLog(String message){
+            txtf_Log.appendText( "\n" + message);
+            System.out.println("Log message -- " + message);
 
     }
 
-
-
+    @Override
+    public void update(ChatMsg msg) {
+        System.out.println("Inside msg update");
+        System.out.println(msg.toString());
+        displayLog(msg.getData());
+    }
 }
+
+
 
 
 
