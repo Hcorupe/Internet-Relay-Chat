@@ -24,6 +24,7 @@ public class IRC extends Application {
         primaryStage.setTitle("Server Logs");
         primaryStage.setScene(new Scene(root, 500, 575));
         primaryStage.show();
+
     }
 
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
@@ -31,6 +32,11 @@ public class IRC extends Application {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         launch(args);
+
+        }
+    }
+
+        //launch(args);
 
         /*
         ServerSocket socket = new ServerSocket(800);
@@ -69,7 +75,6 @@ public class IRC extends Application {
             }
              */
 
-        }
-    }
+
 
 

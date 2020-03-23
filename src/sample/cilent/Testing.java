@@ -42,15 +42,8 @@ public class Testing implements Initializable,ClientObserver {
 
     private final Button add = new Button("Add");
     private final VBox chatBox = new VBox(5);
-    private List<Label> messages = new ArrayList<>();
+    private List<Label> messagelist = new ArrayList<>();
     Client client;
-
-    public Testing() throws IOException, InterruptedException {
-        //Thread.sleep(5000);
-        //Clientsocket = new Socket("localhost",800);
-        //client = new Client(Clientsocket);
-        //client.addObserver(this); //adds to list of things to get updated client will notify
-    }
 
     public void sendMessage() throws IOException {
         currentMessage = txtf_SendMsg.getText();
@@ -58,6 +51,9 @@ public class Testing implements Initializable,ClientObserver {
     }
 
     public void displayMsg(String message){
+
+        //btn_SendMsg.setOnAction(e);
+
         txtf_DisplayMsg.appendText( "\n\n" + message);
         System.out.println("Current messss" + message);
     }
@@ -75,7 +71,6 @@ public class Testing implements Initializable,ClientObserver {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         try {
             Thread.sleep(5000);
             Clientsocket = new Socket("localhost",800);
