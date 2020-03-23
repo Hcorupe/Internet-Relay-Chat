@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 public class Testing implements Initializable,ClientObserver {
     @FXML
         private TextField txtf_DisplayMsg;
@@ -47,10 +46,10 @@ public class Testing implements Initializable,ClientObserver {
     Client client;
 
     public Testing() throws IOException, InterruptedException {
-        Thread.sleep(5000);
-        Clientsocket = new Socket("localhost",800);
-        client = new Client(Clientsocket);
-        client.addObserver(this); //adds to list of things to get updated client will notify
+        //Thread.sleep(5000);
+        //Clientsocket = new Socket("localhost",800);
+        //client = new Client(Clientsocket);
+        //client.addObserver(this); //adds to list of things to get updated client will notify
     }
 
     public void sendMessage() throws IOException {
@@ -76,6 +75,15 @@ public class Testing implements Initializable,ClientObserver {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            Thread.sleep(5000);
+            Clientsocket = new Socket("localhost",800);
+            client = new Client(Clientsocket);
+            client.addObserver(this); //adds to list of things to get updated client will notify
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
         channel = " ";
         currentMessage = " ";
     }

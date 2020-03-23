@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class IRC extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ServerUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("serverTest.fxml"));
         primaryStage.setTitle("Server Logs");
         primaryStage.setScene(new Scene(root, 500, 575));
         primaryStage.show();
@@ -29,6 +29,7 @@ public class IRC extends Application {
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
+
         launch(args);
 
         /*
@@ -40,24 +41,12 @@ public class IRC extends Application {
             ClientConnection client = new ClientConnection(socket.accept());
             System.out.println("after accept ");
             clientConnection.add(client);
+        }
 
-
-         */
-            /*
-            Move Server socket into the UIcontroller for server;
-            update inside UIcontroller adds msg to a log display .
-
-           UIcontroller implement serverObserver
-
-           ServerPublishthread will impelment serverSubject
-
-             */
-
-
-
-        /*
-
-
+            -Move Server socket into the UIcontroller for server;
+            -update inside UIcontroller adds msg to a log display .
+            -UIcontroller implement serverObserver
+            -ServerPublishthread will impelment serverSubject
 
         if(args[0].equals("server")) {
             ServerSocket socket = new ServerSocket(800);
@@ -78,8 +67,8 @@ public class IRC extends Application {
                 client.sendMessage("ch1","Text ...");
                 client.shutdown();
             }
+             */
 
-         */
         }
     }
 

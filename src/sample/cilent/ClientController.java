@@ -45,8 +45,8 @@ public class ClientController implements Initializable {
     TextField ipAddress;
     @FXML TextField sendBox;
 
-    Socket Clientsocket = new Socket("localhost",800);
-    Client client = new Client(Clientsocket);
+    Socket Clientsocket; //= new Socket("localhost",800);
+    Client client; // = new Client(Clientsocket);
 
     public ClientController() throws IOException, InterruptedException {
         System.out.println("NOT WORKING");

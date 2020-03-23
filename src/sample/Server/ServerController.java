@@ -2,6 +2,7 @@ package sample.Server;
 
 import javafx.application.Application;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Common.ChatMsg;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 public class ServerController implements Initializable, ServerObserver {
 
     public TextField txtf_log;
+    public Button btn_testButton;
     ServerSocket socket;
     Thread workerThread;
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
