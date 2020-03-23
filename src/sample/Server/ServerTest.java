@@ -39,7 +39,6 @@ public class ServerTest implements Initializable ,ServerObserver{
                     System.out.println("after accept ");
                     clientConnection.add(client);
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

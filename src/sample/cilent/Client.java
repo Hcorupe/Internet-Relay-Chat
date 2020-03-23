@@ -14,6 +14,7 @@ public class Client implements Runnable,ClientSubject {
     ObjectInputStream in;
     ObjectOutputStream out;
     ArrayList<ClientObserver> myobservers = new ArrayList<>();
+    String userName;
 
     public Client(Socket socket) throws IOException, InterruptedException {
         System.out.println("Before socket ");
@@ -34,10 +35,20 @@ public class Client implements Runnable,ClientSubject {
         out.writeObject(new JoinChannelMsg(channel));
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void sendMessage(String userName, String channel, String data) throws IOException {
+        System.out.println("Inside sendmessage ");
+        out.writeObject(new ChatMsg(userName,channel,data));
+    }
+
+    /*
     public void sendMessage(String channel, String data) throws IOException {
         System.out.println("Inside sendmessage ");
         out.writeObject(new ChatMsg(channel,data));
-    }
+    } */
 
     public void run(){
         try{
@@ -52,10 +63,18 @@ public class Client implements Runnable,ClientSubject {
             e.printStackTrace();
         }
     }
+
+    private void processChatMsg(ChatMsg msg){
+        notifyObserver(msg);
+        System.out.println( "ProcessChatmSg "+ msg.getUserName()+ msg.getChannel() + msg.getData());
+    }
+    /*
     private void processChatMsg(ChatMsg msg){
         notifyObserver(msg);
         System.out.println( "ProcessChatmSg " + msg.getChannel() + msg.getData());
     }
+
+     */
 
     public void shutdown() throws IOException {
         out.writeObject(new ShutDownMsg());

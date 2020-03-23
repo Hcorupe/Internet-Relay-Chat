@@ -10,14 +10,19 @@ import javafx.scene.layout.VBox;
 import sample.Common.ChatMsg;
 import sample.Common.Message;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
+import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class Testing implements Initializable,ClientObserver {
+
+        public TextField txt_userName;
+    public Button btn_setName;
     @FXML
         private TextArea txtf_DisplayMsg;
 
@@ -39,6 +44,7 @@ public class Testing implements Initializable,ClientObserver {
         String currentMessage;
         boolean selectedChannel;
         Socket Clientsocket;
+        String userName;
 
     private final Button add = new Button("Add");
     private final VBox chatBox = new VBox(5);
@@ -61,7 +67,9 @@ public class Testing implements Initializable,ClientObserver {
 
     public void sendMessage() throws IOException {
         currentMessage = txtf_SendMsg.getText();
-        client.sendMessage(channel,currentMessage);
+        userName = txt_userName.getText(); //
+        client.sendMessage(userName,channel,currentMessage);
+        //client.sendMessage(channel,currentMessage);
     }
 
     public void displayMsg(String message){
@@ -70,6 +78,16 @@ public class Testing implements Initializable,ClientObserver {
         txtf_DisplayMsg.appendText( "\n" + message);
         System.out.println("Current messss" + message);
     }
+
+    /*
+    public void setname(ActionEvent e){
+        Button clickedButton = (Button) e.getTarget();
+        userName = txt_userName.getText();
+        client.setUserName(userName);
+
+    }
+
+     */
 
     public void chooseChannel(ActionEvent Event) throws IOException {
         Button clickedButton = (Button) Event.getTarget();
@@ -82,11 +100,15 @@ public class Testing implements Initializable,ClientObserver {
             txtf_DisplayMsg.setText(" "); // reset text box empty if channel changed or clicked
         }
     }
-    
+
     @Override
     public void update(ChatMsg msg) {
         //Add msg text to text box
         displayMsg(msg.getData());
 
     }
+
+
+
+
 }

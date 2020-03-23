@@ -15,6 +15,8 @@
             <Button fx:id="btn_channel1" layoutX="101.0" layoutY="96.0" mnemonicParsing="false" onAction="#chooseChannel" text="Channel1" />
             <Button fx:id="btn_channel2" layoutX="244.0" layoutY="96.0" mnemonicParsing="false" onAction="#chooseChannel" text="Channel2" />
             <TextArea fx:id="txtf_DisplayMsg" layoutX="42.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="txt_userName" layoutX="284.0" layoutY="203.0" promptText="Enter UserName" />
+            <Button fx:id="btn_setName" layoutX="337.0" layoutY="237.0" mnemonicParsing="false" text="Set Name" />
          </children>
       </Pane>
    </children>

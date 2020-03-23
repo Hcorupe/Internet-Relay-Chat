@@ -87,7 +87,8 @@ public class ClientController implements Initializable {
 
     public void sendMessage() throws IOException {
         currentMessage = sendBox.getText();
-        client.sendMessage(channel,currentMessage);
+        //client.sendMessage(channel,currentMessage);
+        client.sendMessage(username,channel,currentMessage);
     }
     public void disconnect() throws IOException {
         client.shutdown();
