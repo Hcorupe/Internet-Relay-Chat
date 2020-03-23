@@ -20,23 +20,21 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ServerController implements ServerObserver, Initializable {
-    @FXML
-    TextField txtf_log;
 
-    public ServerController() throws IOException{
-        System.out.println("First");
+    public TextField txtf_log;
+    ServerSocket socket;
+    Thread workerThread;
+    static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
+
+    public ServerController() throws IOException {
+
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ServerSocket socket = null;
         try {
-            socket = new ServerSocket(8000);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Thread workerThread = new Thread(new ServerPublishThread());
-        ArrayList<ClientConnection> clientConnection = new ArrayList<>();
-        try {
+            socket = new ServerSocket(800);
+            workerThread = new Thread( new ServerPublishThread());
             workerThread.start();
             while(true){
                 System.out.println("Before accept ");
@@ -48,7 +46,6 @@ public class ServerController implements ServerObserver, Initializable {
             e.printStackTrace();
         }
     }
-
     public void displayLog(String message) {
         txtf_log.appendText("\n" + message);
         System.out.println("Log message -- " + message);
