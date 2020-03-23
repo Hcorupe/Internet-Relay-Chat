@@ -1,5 +1,6 @@
-package sample.cilent;
+package sample.Client;
 
+import sample.Client.ClientObserver;
 import sample.Common.ChatMsg;
 
 public interface ClientSubject {

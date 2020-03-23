@@ -1,4 +1,4 @@
-package sample.cilent;
+package sample.Client;
 
 import sample.Common.ChatMsg;
 

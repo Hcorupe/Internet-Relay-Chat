@@ -1,4 +1,4 @@
-package sample.cilent;
+package sample.Client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.InetAddress;
 
@@ -42,7 +43,7 @@ public class ClientLoginController {
             System.out.println(ipAdd);
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("ClientUI.fxml"));
+            loader.setLocation(getClass().getResource("sample/Client/ClientUI.fxml"));
             Parent tableViewParent = loader.load();
             Scene tableViewScene = new Scene(tableViewParent);
 

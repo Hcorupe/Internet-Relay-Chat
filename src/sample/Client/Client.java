@@ -1,4 +1,4 @@
-package sample.cilent;
+package sample.Client;
 
 import sample.Common.*;
 
@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-public class Client implements Runnable,ClientSubject {
+public class Client implements Runnable, ClientSubject {
 
     private Socket socket;
     ObjectInputStream in;

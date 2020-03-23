@@ -1,4 +1,4 @@
-package sample.cilent;
+package sample.Client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +11,11 @@ public class ClientMain extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("This one is first in the Client.");
-        Parent root = FXMLLoader.load(getClass().getResource("ClientLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/client/ClientLogin.fxml"));
         System.out.println("This one is first in the Client.");
         primaryStage.setTitle("Client Login");
         System.out.println("This one is first in the Client.");
-        primaryStage.setScene(new Scene(root, 250, 400));
+        primaryStage.setScene(new Scene(root));
         System.out.println("This one is first in the Client.");
         primaryStage.show();
     }
