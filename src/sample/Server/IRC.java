@@ -12,13 +12,17 @@ import java.io.IOException;
 public class IRC extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        System.out.println("This should be first, but its not?");
         Parent root = FXMLLoader.load(getClass().getResource("ServerUI.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        System.out.println("This should be first, but its not?");
+        primaryStage.setTitle("Server");
+        System.out.println("This should be first, but its not?");
+        primaryStage.setScene(new Scene(root, 400, 400));
+        System.out.println("This should be first, but its not?");
         primaryStage.show();
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args){
         launch(args);
         }
     }

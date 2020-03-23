@@ -45,7 +45,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
     public void processChatMsg(ChatMsg msg) throws IOException {
         Channel channel = channels.get(msg.getChannel());
         System.out.println(msg.getData());
-        //channel.PublishToChannel(msg);
+        channel.PublishToChannel(msg);
     }
 
     static void addMsg(Message msg){
@@ -56,11 +56,13 @@ public class ServerPublishThread implements Runnable,ServerSubject{
 
     @Override
     public void addObserver(ServerObserver s) {
+        System.out.println("ADDING OBS");
         this.myobservers.add(s);
     }
 
     @Override
     public void notifyObserver(ChatMsg msg) {
+        System.out.println("NOTIFYING OBS");
         for(ServerObserver s: this.myobservers){
             s.update(msg);
         }

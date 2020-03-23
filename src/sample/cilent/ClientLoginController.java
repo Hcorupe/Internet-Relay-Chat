@@ -55,7 +55,7 @@ public class ClientLoginController {
             window.show();
         }
     }
-    public void chooseChannel(ActionEvent Event){
+    public void chooseChannel(ActionEvent Event) throws IOException {
         MenuItem clickedButton = (MenuItem) Event.getTarget();
         channel = clickedButton.getText();
         channelMenu.setText(channel);

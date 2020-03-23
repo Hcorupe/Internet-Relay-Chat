@@ -7,12 +7,11 @@ import java.util.ArrayList;
 
 public class Channel {
     ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
-
     public Channel() {
-
     }
 
     public void addClient(JoinChannelMsg msg) throws IOException {
+        System.out.println("Adding Client");
         if(clients.contains(msg.getClient())){
             return; // prevent client from adding multpule times
         }
@@ -23,6 +22,7 @@ public class Channel {
     }
 
     public void PublishToChannel(ChatMsg msg) throws IOException {
+        System.out.println("PUBLISHING TO CHANNELS");
         for(ClientConnection c : clients){
             c.sendMessage(msg);
         }
