@@ -29,7 +29,7 @@ public class ServerTest implements Initializable ,ServerObserver{
             try {
                 Thread workerThread = new Thread(new ServerPublishThread());
                 workerThread.start();
-                socket = new ServerSocket(800);
+                socket = new ServerSocket(22222);
                 System.out.println("After socket");
                 Platform.runLater(() -> txtf_Log.appendText("New Server start at "
                         + new Date() + '\n'  ));
