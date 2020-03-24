@@ -42,8 +42,8 @@ public class ClientLoginController {
             ipAdd = localhost.getHostAddress().trim();
             System.out.println(ipAdd);
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("ClientUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(ClientLoginController.class.getResource("ClientUI.fxml"));
+            //loader.setLocation(getClass().getResource("ClientUI.fxml"));
             Parent tableViewParent = loader.load();
             Scene tableViewScene = new Scene(tableViewParent);
 
