@@ -55,7 +55,7 @@ public class Testing implements Initializable,ClientObserver {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Thread.sleep(5000);
-            Clientsocket = new Socket("localhost",800);
+            Clientsocket = new Socket("localhost",22222);
             client = new Client(Clientsocket);
             client.addObserver(this); //adds to list of things to get updated client will notify
         } catch (IOException | InterruptedException e) {
