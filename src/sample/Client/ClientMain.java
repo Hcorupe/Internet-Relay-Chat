@@ -11,7 +11,7 @@ public class ClientMain extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("This one is first in the Client.");
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/client/ClientLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ClientLogin.fxml"));
         System.out.println("This one is first in the Client.");
         primaryStage.setTitle("Client Login");
         System.out.println("This one is first in the Client.");
