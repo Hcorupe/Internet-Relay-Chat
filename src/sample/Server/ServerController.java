@@ -3,6 +3,7 @@ package sample.Server;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import sample.Common.ChatMsg;
 
@@ -15,7 +16,8 @@ import java.util.ResourceBundle;
 
 public class ServerController implements ServerObserver, Initializable {
     @FXML
-    public TextField txtf_log;
+    public TextArea txta_log;
+
     ServerSocket socket;
     Thread workerThread;
     static ArrayList<ClientConnection> clientConnection = new ArrayList<>();
@@ -29,11 +31,13 @@ public class ServerController implements ServerObserver, Initializable {
         new Thread(() -> {
             System.out.println("inside Thread");
             try {
-                Thread workerThread = new Thread(new ServerPublishThread());
+                ServerPublishThread spThread=new ServerPublishThread();
+                spThread.addObserver(this);
+                Thread workerThread = new Thread(spThread);
                 workerThread.start();
-                socket = new ServerSocket(8000);
+                socket = new ServerSocket(22222);
                 System.out.println("After socket");
-                Platform.runLater(() -> txtf_log.appendText("New Server start at "
+                Platform.runLater(() -> txta_log.appendText("New Server start at "
                         + new Date() + '\n'  ));
                 while (true) {
                     System.out.println("Before accept ");
@@ -48,14 +52,14 @@ public class ServerController implements ServerObserver, Initializable {
 
     }
     public void displayLog(String message) {
-        txtf_log.appendText("\n" + message);
+        txta_log.appendText("\n" + message);
         System.out.println("Log message -- " + message);
     }
 
     @Override
     public void update(ChatMsg msg) {
         System.out.println("UPDATING");
-        displayLog(msg.getData());
+        displayLog(msg.getChannel()+" "+msg.getUser()+" "+msg.getData());
     }
 
 }
