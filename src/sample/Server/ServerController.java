@@ -31,7 +31,7 @@ public class ServerController implements ServerObserver, Initializable {
             try {
                 Thread workerThread = new Thread(new ServerPublishThread());
                 workerThread.start();
-                socket = new ServerSocket(800);
+                socket = new ServerSocket(8000);
                 System.out.println("After socket");
                 Platform.runLater(() -> txtf_log.appendText("New Server start at "
                         + new Date() + '\n'  ));
