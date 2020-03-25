@@ -7,12 +7,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-public class Client implements Runnable, ClientSubject {
+public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject {
 
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
     ArrayList<ClientObserver> myobservers = new ArrayList<>();
+    ArrayList<ClientJoinMsgObserver> JoinMsgObservers = new ArrayList<>();
 
     public Client(Socket socket) throws IOException {
         System.out.println("Before socket ");
@@ -27,9 +28,9 @@ public class Client implements Runnable, ClientSubject {
         System.out.println("after thread ");
     }
 
-    public void joinChannel(String channel) throws IOException {
+    public void joinChannel(String channel,String userName) throws IOException {
         System.out.println("Inside joinChannel ");
-        out.writeObject(new JoinChannelMsg(channel));
+        out.writeObject(new JoinChannelMsg(channel,userName));
     }
 
     public void sendMessage(String channel, String data,String userName) throws IOException {
@@ -42,7 +43,11 @@ public class Client implements Runnable, ClientSubject {
             while(true){
                 System.out.println("Trying to read ");
                 Message msg = (Message)in.readObject();
-                if(msg.getType() == MsgType.type.ChatMsg){
+
+                if(msg.getType() == MsgType.type.JoinMsg){
+                    processJoinChannelMsg((JoinChannelMsg)msg);
+                }
+                else if(msg.getType() == MsgType.type.ChatMsg){
                     processChatMsg((ChatMsg)msg);
                 }
             }
@@ -51,9 +56,15 @@ public class Client implements Runnable, ClientSubject {
         }
     }
     private void processChatMsg(ChatMsg msg){
-        System.out.println("PROCESSING");
+        System.out.println("PROCESSING chat");
         notifyObserver(msg);
-        System.out.println( "ProcessChatMsg " + msg.getChannel() + msg.getData());
+        System.out.println( "ProcessChatMsg " + msg.getChannel() + msg.getData() );
+    }
+
+    private void processJoinChannelMsg(JoinChannelMsg msg){
+        System.out.println("PROCESSING join");
+        NotifyJoinChannelObserver(msg);
+        System.out.println( "ProcessJoinChannelMsg " );
     }
 
     public void shutdown() throws IOException {
@@ -70,6 +81,18 @@ public class Client implements Runnable, ClientSubject {
     public void notifyObserver(ChatMsg msg) {
         for(ClientObserver c : this.myobservers){
             c.update(msg);
+        }
+    }
+
+    @Override
+    public void addJoinChannelMsg(ClientJoinMsgObserver c) {
+        this.JoinMsgObservers.add(c);
+    }
+
+    @Override
+    public void NotifyJoinChannelObserver(JoinChannelMsg msg) {
+        for(ClientJoinMsgObserver c: this.JoinMsgObservers){
+            c.updateJoinChannel(msg);
         }
     }
 }

@@ -8,6 +8,7 @@ public class Message implements Serializable {
     MsgType.type type;
     transient ClientConnection client;
 
+
     public MsgType.type getType(){
     return type;
     }

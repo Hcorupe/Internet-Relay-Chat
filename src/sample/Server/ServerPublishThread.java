@@ -1,5 +1,6 @@
 package sample.Server;
 
+import sample.Client.ClientObserver;
 import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
 import sample.Common.MsgType;
@@ -43,6 +44,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
             value.deleteClient(msg.getClient());
         }
         channel.addClient(msg);   // adds client connection to Channels client arrayList
+
         System.out.println(msg.getChannel());
     }
     public void processChatMsg(ChatMsg msg) throws IOException {
@@ -64,6 +66,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
         this.myobservers.add(s);
     }
 
+
     @Override
     public void notifyObserver(ChatMsg msg) {
         System.out.println("NOTIFYING OBS");
@@ -71,4 +74,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
             s.update(msg);
         }
     }
+
+
+
 }
