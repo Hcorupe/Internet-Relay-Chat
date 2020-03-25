@@ -51,7 +51,6 @@ public class ServerPublishThread implements Runnable,ServerSubject{
 
     static void addMsg(Message msg){
         System.out.println("Adding msg to queue of type " + msg.getType());
-
         blockingQueue.add(msg);
 
     }

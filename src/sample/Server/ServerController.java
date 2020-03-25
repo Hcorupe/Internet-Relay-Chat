@@ -35,7 +35,7 @@ public class ServerController implements ServerObserver, Initializable {
                 spThread.addObserver(this);
                 Thread workerThread = new Thread(spThread);
                 workerThread.start();
-                socket = new ServerSocket(22222);
+                socket = new ServerSocket(8000);
                 System.out.println("After socket");
                 Platform.runLater(() -> txta_log.appendText("New Server start at "
                         + new Date() + '\n'  ));
