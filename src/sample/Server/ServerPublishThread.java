@@ -39,6 +39,9 @@ public class ServerPublishThread implements Runnable,ServerSubject{
             channel = new Channel();
             channels.put(msg.getChannel(),channel);  // puts string and new channel into hashmap
         }
+        for (Channel value : channels.values()) {
+            value.deleteClient(msg.getClient());
+        }
         channel.addClient(msg);   // adds client connection to Channels client arrayList
         System.out.println(msg.getChannel());
     }
