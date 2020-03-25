@@ -20,7 +20,9 @@ public class Channel {
         }
         clients.add(msg.getClient());
     }
-
+    public void deleteClient(ClientConnection client) {
+        clients.remove(client);
+    }
     public void PublishToChannel(ChatMsg msg){
         System.out.println("PUBLISHING TO CHANNELS");
         for(ClientConnection c : clients){
