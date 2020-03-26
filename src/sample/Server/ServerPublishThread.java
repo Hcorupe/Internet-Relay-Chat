@@ -15,7 +15,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
     HashMap<String, Channel> channels = new HashMap<String, Channel>();
     ArrayList<ServerObserver> myobservers = new ArrayList<>();
 
-    public void run() { // pull from q and check msg type .. then handle
+    public void run() {
         while(true){
             try {
                 System.out.println("Trying to take from queue ");
