@@ -26,7 +26,7 @@ public class ClientConnection implements Runnable{
         System.out.println("Thread started");
     }
 
-    //getThread getter
+    //getThread
     @Override
     public void run() {
         System.out.println("Run started");
