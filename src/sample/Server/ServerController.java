@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ServerController implements ServerObserver, Initializable {
+public class ServerController implements ServerObserver, Initializable ,ServerJoinMsgObserver {
     @FXML
     public TextArea txta_log;
 
@@ -62,8 +62,10 @@ public class ServerController implements ServerObserver, Initializable {
         System.out.println("UPDATING");
         displayLog(msg.getChannel()+" "+msg.getUser()+" "+msg.getData());
     }
+    @Override
+    public void updateJoinServer() {
+        txta_log.appendText("Client");
+    }
+    }
 
 
-
-
-}

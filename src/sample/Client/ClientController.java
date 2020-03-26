@@ -73,7 +73,7 @@ public class ClientController implements ClientObserver,ClientJoinMsgObserver {
     }
 
     public void displayJoinChannelMsg(String channel,String whoSentIt){
-        outputUI.appendText( whoSentIt +" : Joined the channel");
+        outputUI.appendText( whoSentIt +" : Joined the channel \n");
     }
 
     @Override
