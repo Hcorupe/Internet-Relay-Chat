@@ -1,5 +1,6 @@
 package sample.Server;
 
+import sample.Client.ClientJoinMsgObserver;
 import sample.Client.ClientObserver;
 import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
@@ -10,11 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
-public class ServerPublishThread implements Runnable,ServerSubject{
+public class ServerPublishThread implements Runnable,ServerSubject,ServerJoinMsgSubject{
 
     static LinkedBlockingQueue<Message> blockingQueue = new LinkedBlockingQueue<Message>();
     HashMap<String, Channel> channels = new HashMap<String, Channel>();
     ArrayList<ServerObserver> myobservers = new ArrayList<>();
+    ArrayList<ServerJoinMsgObserver> JoinMsgObservers = new ArrayList<>();
 
     public void run() { // pull from q and check msg type .. then handle
         while(true){
@@ -43,6 +45,7 @@ public class ServerPublishThread implements Runnable,ServerSubject{
         for (Channel value : channels.values()) {
             value.deleteClient(msg.getClient());
         }
+        NotifyJoinChannelObserver(msg);
         channel.addClient(msg);   // adds client connection to Channels client arrayList
 
         System.out.println(msg.getChannel());
@@ -57,7 +60,6 @@ public class ServerPublishThread implements Runnable,ServerSubject{
     static void addMsg(Message msg){
         System.out.println("Adding msg to queue of type " + msg.getType());
         blockingQueue.add(msg);
-
     }
 
     @Override
@@ -75,6 +77,16 @@ public class ServerPublishThread implements Runnable,ServerSubject{
         }
     }
 
+    @Override
+    public void addJoinChannelMsg(ServerJoinMsgObserver c) {
+        this.JoinMsgObservers.add(c);
+    }
 
-
+    @Override
+    public void NotifyJoinChannelObserver(JoinChannelMsg msg) {
+        System.out.println(msg.getUserName() + "BEING CALLED");
+        for(ServerJoinMsgObserver c: this.JoinMsgObservers){
+            c.updateJoinChannel(msg);
+        }
+    }
 }

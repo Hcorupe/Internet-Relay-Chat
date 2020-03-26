@@ -1,9 +1,10 @@
 package sample.Server;
 
+import sample.Client.ClientJoinMsgObserver;
 import sample.Common.JoinChannelMsg;
 
 public interface ServerJoinMsgSubject {
 
-    void addJoinServerMsg(ServerJoinMsgObserver c);
-    void NotifyJoinServerObserver(JoinChannelMsg msg);
+    void addJoinChannelMsg(ServerJoinMsgObserver c);
+    void NotifyJoinChannelObserver(JoinChannelMsg msg);
 }

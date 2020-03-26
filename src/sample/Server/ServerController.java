@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import sample.Client.ClientJoinMsgObserver;
 import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
 
@@ -34,6 +35,7 @@ public class ServerController implements ServerObserver, Initializable ,ServerJo
             try {
                 ServerPublishThread spThread=new ServerPublishThread();
                 spThread.addObserver(this);
+                spThread.addJoinChannelMsg(this);
                 Thread workerThread = new Thread(spThread);
                 workerThread.start();
                 socket = new ServerSocket(8000);
@@ -63,8 +65,9 @@ public class ServerController implements ServerObserver, Initializable ,ServerJo
         displayLog(msg.getChannel()+" "+msg.getUser()+" "+msg.getData());
     }
     @Override
-    public void updateJoinServer() {
-        txta_log.appendText("Client");
+    public void updateJoinChannel(JoinChannelMsg msg){
+        System.out.println("IS THIS RUNNING?");
+        displayLog(msg.getUserName() + " has entered " + msg.getChannel() );
     }
     }
 

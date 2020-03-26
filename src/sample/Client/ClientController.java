@@ -40,7 +40,7 @@ public class ClientController implements ClientObserver,ClientJoinMsgObserver,Cl
     public ClientController() throws IOException{
         System.out.println("Adding OBServe");
         client.addObserver(this);
-        client.addJoinChannelMsg((ClientJoinMsgObserver) this); //
+        client.addJoinChannelMsg( this); //
         client.addLeaveChannelMsg(this);
     }
 
@@ -76,7 +76,6 @@ public class ClientController implements ClientObserver,ClientJoinMsgObserver,Cl
     }
 
     public void displayJoinChannelMsg(String channel,String whoSentIt){
-        outputUI.appendText( whoSentIt +" : Joined the channel \n");
         outputUI.appendText( whoSentIt +" : Joined the channel" + "\n");
     }
     public void displayLeaveMsg(String whoSentIt){

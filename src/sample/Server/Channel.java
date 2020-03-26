@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class Channel{
     ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
-    ArrayList<ClientObserver> myobservers = new ArrayList<>();
-    ArrayList<ClientJoinMsgObserver> JoinMsgObservers = new ArrayList<>();
     public Channel() {
     }
 

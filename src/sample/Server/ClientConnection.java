@@ -20,7 +20,6 @@ public class ClientConnection implements Runnable{
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
-        ArrayList<String> subScribedChannels = new ArrayList<String>();
         t1 = new Thread( this);
         t1.start();
         System.out.println("Thread started");
