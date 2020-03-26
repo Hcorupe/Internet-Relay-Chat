@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class Channel {
     ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
-    public Channel() {
-    }
+    public Channel() { }
 
     public void addClient(JoinChannelMsg msg) throws IOException {
         System.out.println("Adding Client");
@@ -21,6 +20,7 @@ public class Channel {
         clients.add(msg.getClient());
     }
     public void deleteClient(ClientConnection client) {
+        System.out.println("Remove client connection");
         clients.remove(client);
     }
     public void PublishToChannel(ChatMsg msg){
