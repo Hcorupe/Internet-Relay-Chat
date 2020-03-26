@@ -9,13 +9,9 @@ import javafx.stage.Stage;
 public class IRC extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("This should be first, but its not?");
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Server/ServerUI.fxml"));
-        System.out.println("This should be first, but its not?");
         primaryStage.setTitle("Server");
-        System.out.println("This should be first, but its not?");
         primaryStage.setScene(new Scene(root));
-        System.out.println("This should be first, but its not?");
         primaryStage.show();
     }
 
