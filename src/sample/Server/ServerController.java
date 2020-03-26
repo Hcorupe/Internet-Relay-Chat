@@ -49,12 +49,10 @@ public class ServerController implements ServerObserver, Initializable {
     }
     public void displayLog(String message) {
         txtf_log.appendText("\n" + message);
-        System.out.println("Log message -- " + message);
     }
 
     @Override
     public void update(ChatMsg msg) {
-        System.out.println("UPDATING");
         displayLog(msg.getData());
     }
 
