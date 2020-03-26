@@ -64,7 +64,7 @@ public class ClientController implements ClientObserver,ClientJoinMsgObserver,Cl
     }
     public void changeChannel(ActionEvent Event) throws IOException {   //Changes the channel on the second UI
         MenuItem clickedButton = (MenuItem) Event.getTarget();
-        //client.LeaveMessage(channel,username); Dont know where to put this
+        client.LeaveMessage(channel,username);
         channel = clickedButton.getText();
         changeCh.setText(channel);
         client.joinChannel(channel,username);

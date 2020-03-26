@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import sample.Client.ClientJoinMsgObserver;
 import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
+import sample.Common.LeaveChannelMsg;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ServerController implements ServerObserver, Initializable ,ServerJoinMsgObserver {
+public class ServerController implements ServerObserver, Initializable ,ServerJoinMsgObserver,ServerLeaveMsgObserver {
     @FXML
     public TextArea txta_log;
 
@@ -36,6 +37,7 @@ public class ServerController implements ServerObserver, Initializable ,ServerJo
                 ServerPublishThread spThread=new ServerPublishThread();
                 spThread.addObserver(this);
                 spThread.addJoinChannelMsg(this);
+                spThread.addLeaveChannelMsg(this);
                 Thread workerThread = new Thread(spThread);
                 workerThread.start();
                 socket = new ServerSocket(8000);
@@ -69,6 +71,13 @@ public class ServerController implements ServerObserver, Initializable ,ServerJo
         System.out.println("IS THIS RUNNING?");
         displayLog(msg.getUserName() + " has entered " + msg.getChannel() );
     }
+
+    @Override
+    public void updateLeaveChannel(LeaveChannelMsg msg){
+        System.out.println("IS THIS Working");
+        displayLog(msg.getUserName() + " has Left " + msg.getChannel() );
+    }
+
     }
 
 

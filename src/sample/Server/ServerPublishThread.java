@@ -1,22 +1,18 @@
 package sample.Server;
 
-import sample.Client.ClientJoinMsgObserver;
-import sample.Client.ClientObserver;
-import sample.Common.ChatMsg;
-import sample.Common.JoinChannelMsg;
-import sample.Common.MsgType;
-import sample.Common.Message;
+import sample.Common.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
-public class ServerPublishThread implements Runnable,ServerSubject,ServerJoinMsgSubject{
+public class ServerPublishThread implements Runnable,ServerSubject,ServerJoinMsgSubject,ServerLeaveMsgSubject{
 
     static LinkedBlockingQueue<Message> blockingQueue = new LinkedBlockingQueue<Message>();
     HashMap<String, Channel> channels = new HashMap<String, Channel>();
     ArrayList<ServerObserver> myobservers = new ArrayList<>();
     ArrayList<ServerJoinMsgObserver> JoinMsgObservers = new ArrayList<>();
+    ArrayList<ServerLeaveMsgObserver> LeaveMsgObservers = new ArrayList<>();
 
     public void run() { // pull from q and check msg type .. then handle
         while(true){
@@ -29,6 +25,10 @@ public class ServerPublishThread implements Runnable,ServerSubject,ServerJoinMsg
                     processChatMsg((ChatMsg) msg);
                 }
                 if(msg.getType() == MsgType.type.ShutDownMsg){
+                    msg.getClient().shutdown();
+                }
+                if(msg.getType() == MsgType.type.LeaveMsg){
+                    addLeaveChannelMsg((ServerLeaveMsgObserver) msg);
                     msg.getClient().shutdown();
                 }
             }catch (IOException | InterruptedException e){
@@ -87,6 +87,17 @@ public class ServerPublishThread implements Runnable,ServerSubject,ServerJoinMsg
         System.out.println(msg.getUserName() + "BEING CALLED");
         for(ServerJoinMsgObserver c: this.JoinMsgObservers){
             c.updateJoinChannel(msg);
+        }
+    }
+    @Override
+    public void addLeaveChannelMsg(ServerLeaveMsgObserver c){
+        this.LeaveMsgObservers.add(c);
+
+    }
+    @Override
+    public void NotifyLeaveChannelObserver(LeaveChannelMsg msg){
+        for(ServerLeaveMsgObserver c : this.LeaveMsgObservers){
+            c.updateLeaveChannel(msg);
         }
     }
 }

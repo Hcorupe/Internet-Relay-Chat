@@ -1,7 +1,5 @@
 package sample.Server;
 
-import sample.Client.ClientJoinMsgObserver;
-import sample.Client.ClientObserver;
 import sample.Common.ChatMsg;
 import sample.Common.JoinChannelMsg;
 import java.io.IOException;
