@@ -7,13 +7,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject {
+public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject,ClientLeaveMsgSubject {
 
     private Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
     ArrayList<ClientObserver> myobservers = new ArrayList<>();
     ArrayList<ClientJoinMsgObserver> JoinMsgObservers = new ArrayList<>();
+    ArrayList<ClientLeaveMsgObserver> LeaveMsgObservers = new ArrayList<>();
 
     public Client(Socket socket) throws IOException {
         System.out.println("Before socket ");
@@ -32,10 +33,13 @@ public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject {
         System.out.println("Inside joinChannel ");
         out.writeObject(new JoinChannelMsg(channel,userName));
     }
-
     public void sendMessage(String channel, String data,String userName) throws IOException {
         System.out.println("Inside sendMessage ");
         out.writeObject(new ChatMsg(channel,data,userName));
+    }
+    public void LeaveMessage(String channel,String userName) throws IOException {
+        System.out.println("Inside Leave msg");
+        out.writeObject(new LeaveChannelMsg(channel,userName));
     }
 
     public void run(){
@@ -49,6 +53,9 @@ public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject {
                 }
                 else if(msg.getType() == MsgType.type.ChatMsg){
                     processChatMsg((ChatMsg)msg);
+                }
+                else if(msg.getType() == MsgType.type.LeaveMsg){
+                    processLeaveChannelMsg((LeaveChannelMsg)msg);
                 }
             }
         }catch(IOException | ClassNotFoundException e){
@@ -65,6 +72,12 @@ public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject {
         System.out.println("PROCESSING join");
         NotifyJoinChannelObserver(msg);
         System.out.println( "ProcessJoinChannelMsg " );
+    }
+
+    private void processLeaveChannelMsg(LeaveChannelMsg msg){
+        System.out.println("Processing leave msg");
+        NotifyLeaveChannelObserver(msg);
+
     }
 
     public void shutdown() throws IOException {
@@ -93,6 +106,18 @@ public class Client implements Runnable, ClientSubject,ClientJoinMsgSubject {
     public void NotifyJoinChannelObserver(JoinChannelMsg msg) {
         for(ClientJoinMsgObserver c: this.JoinMsgObservers){
             c.updateJoinChannel(msg);
+        }
+    }
+
+    @Override
+    public void addLeaveChannelMsg(ClientLeaveMsgObserver c) {
+        this.LeaveMsgObservers.add(c);
+    }
+
+    @Override
+    public void NotifyLeaveChannelObserver(LeaveChannelMsg msg) {
+        for(ClientLeaveMsgObserver c : this.LeaveMsgObservers){
+            c.updateLeaveChannel(msg);
         }
     }
 }
