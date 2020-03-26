@@ -7,16 +7,12 @@ import sample.Common.JoinChannelMsg;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Channel implements ServerJoinMsgSubject{
+public class Channel{
     ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
-<<<<<<< HEAD
     ArrayList<ClientObserver> myobservers = new ArrayList<>();
     ArrayList<ClientJoinMsgObserver> JoinMsgObservers = new ArrayList<>();
     public Channel() {
     }
-=======
-    public Channel() { }
->>>>>>> 019aaa51a82f09183cccb4e1024f62d49ced0aa9
 
     public void addClient(JoinChannelMsg msg) throws IOException {
         System.out.println("Adding Client");
@@ -39,23 +35,5 @@ public class Channel implements ServerJoinMsgSubject{
         }
         System.out.println(clients.size());
     }
-    @Override
-    public void addJoinServerMsg(ClientConnection c){
-        this.addJoinServerMsg(c);
-    }
-    @Override
-    public void NotifyJoinServerObserver( ){
 
-    }
-    @Override
-    public void addJoinChannelMsg(ClientJoinMsgObserver c) {
-        this.JoinMsgObservers.add(c);
-    }
-
-    @Override
-    public void NotifyJoinChannelObserver(JoinChannelMsg msg) {
-        for(ClientJoinMsgObserver c: this.JoinMsgObservers){
-            c.updateJoinChannel(msg);
-        }
-    }
 }
